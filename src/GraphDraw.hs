@@ -11,7 +11,7 @@ data DotProgram = Twopi | Circo | Dot | Neato | Fdp | Sfdp deriving (Show)
 
 -- Example usage:
 -- > graphDraw "/tmp/graph.png" (k_ 20) 
-graphDraw :: (Eq a, Ord a, Show a) => FilePath -> DotProgram -> Graph a -> IO ()
+graphDraw :: FilePath -> DotProgram -> Graph -> IO ()
 graphDraw fp pg g = do
   -- write dotfile
   let tmp = "/tmp/dot"
@@ -20,10 +20,10 @@ graphDraw fp pg g = do
   hPutStrLn h "\tnode[label=\"\",shape=point];"
   mapM_ ( hPutStrLn h 
         . (\i -> "\t\"" ++ show i ++ "\"")
-        ) $ S.toList $ vertices g
+        ) $ listVertices g
   mapM_ ( hPutStrLn h 
         . (\(i,j) -> "\t\"" ++ show i ++ "\" -- \"" ++ show j ++ "\"")
-        ) $ S.toList $ edges g
+        ) $ listEdges g
   hPutStrLn h "}"
   hClose h
   -- run whatever program on it

@@ -16,8 +16,8 @@ isomorphismTest = TestList
 
 degreesTest = TestList [ TestCase 
                          $ assertEqual "A vertex of K_153 has degree 152" 
-                           (degree (k_ 153) 1) 
-                           152
+                           (degree (k_ 15) 1) 
+                           14
                        , TestCase 
                          $ assertEqual "Testing an example degree distribution" 
                            (degDist $ k_ 5) 
